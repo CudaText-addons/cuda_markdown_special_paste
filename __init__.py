@@ -46,9 +46,7 @@ class Command:
         if not text:
             return
 
-        title = get_title(text, 'title') or get_title(text, 'TITLE')
-        if not title:
-            title = 'Title'
+        title = get_title(text, 'title') or get_title(text, 'TITLE') or 'Title'
 
         lex = ed.get_prop(PROP_LEXER_CARET)
         fmt = FORMATS.get(lex)
