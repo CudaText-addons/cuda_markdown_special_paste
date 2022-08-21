@@ -12,13 +12,13 @@ def dbg(s):
     #print(s)
     pass
 
-def get_title(s):
-    n = s.find('<title>')
+def get_title(s, tag):
+    n = s.find('<'+tag+'>')
     if n<0:
         dbg('no <title>: '+s)
         return
     s = s[n+7:]
-    n = s.find('</title>')
+    n = s.find('</'+tag+'>')
     if n<0:
         dbg('no </title>: '+s)
         return
@@ -46,7 +46,7 @@ class Command:
         if not text:
             return
 
-        title = get_title(text)
+        title = get_title(text, 'title') or get_title(text, 'TITLE')
         if not title:
             title = 'Title'
 
