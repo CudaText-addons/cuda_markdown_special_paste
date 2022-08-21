@@ -32,6 +32,12 @@ def get_title(s, tag):
 class Command:
 
     def on_paste(self, ed_self, keep_caret, select_then):
+
+        # Shift pressed? don't work
+        state = app_proc(PROC_GET_KEYSTATE, '')
+        if 's' in state:
+            return
+
         s = app_proc(PROC_GET_CLIP, '')
         if '\n' in s:
             return
