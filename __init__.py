@@ -17,7 +17,7 @@ def get_title(s, tag):
     if n<0:
         dbg('no <title>: '+s)
         return
-    s = s[n+7:]
+    s = s[n+len(tag)+2:]
     n = s.find('</'+tag+'>')
     if n<0:
         dbg('no </title>: '+s)
