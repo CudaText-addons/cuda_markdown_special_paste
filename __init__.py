@@ -20,6 +20,5 @@ class Command:
         if not fmt:
             return
         fmt = fmt.replace('{url}', s)
-        caret = ed.get_carets()
         ed.cmd(cmds.cCommand_TextInsert, fmt)
         return False
