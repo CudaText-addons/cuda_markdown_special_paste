@@ -3,7 +3,7 @@ title=Special URL Paste
 desc=Modifies pasted URL, when pasting it in lexers Markdown, reStructuredText
 type=cudatext-plugin
 subdir=cuda_url_paste
-homepage=https://github.com/CudaText-addons/cuda_url_paste
+homepage=https://github.com/CudaText-addons/cuda_special_url_paste
 
 [item1]
 section=events
