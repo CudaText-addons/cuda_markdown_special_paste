@@ -8,3 +8,4 @@ homepage=https://github.com/CudaText-addons/cuda_url_paste
 [item1]
 section=events
 events=on_paste
+lexers=Markdown,reStructuredText
