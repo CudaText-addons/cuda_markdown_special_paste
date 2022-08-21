@@ -2,6 +2,9 @@ import os
 from cudatext import *
 import cudatext_cmd as cmds
 import requests
+import html
+
+GET_TIMEOUT = 5 # in seconds
 
 FORMATS = {
     'Markdown': '[{title}]({url})',
@@ -23,7 +26,7 @@ def get_title(s, tag):
         dbg('no </title>: '+s)
         return
     s = s[:n]
-    return s
+    return html.unescape(s)
 
 
 class Command:
@@ -36,7 +39,7 @@ class Command:
             return
 
         try:
-            r = requests.get(s)
+            r = requests.get(s, verify=False, timeout=GET_TIMEOUT)
         except:
             return
 
