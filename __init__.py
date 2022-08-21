@@ -42,19 +42,20 @@ class Command:
 
         if not r:
             return
-        text = r.content.decode('utf-8')
+        text = r.content.decode('utf-8', errors='replace')
         if not text:
             return
 
         title = get_title(text)
         if not title:
-            return
+            title = 'Title'
 
-        lex = ed.get_prop(PROP_LEXER_FILE)
+        lex = ed.get_prop(PROP_LEXER_CARET)
         fmt = FORMATS.get(lex)
         if not fmt:
             return
         fmt = fmt.replace('{url}', s)
         fmt = fmt.replace('{title}', title)
+
         ed.cmd(cmds.cCommand_TextInsert, fmt)
-        return False
+        return False #block usual Paste
