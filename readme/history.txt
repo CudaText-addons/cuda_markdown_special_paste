@@ -2,7 +2,7 @@
 2022.08.23
 * renamed plugin to 'Markdown Special Paste'
 + add: handle pasting of pictures for Markdown/reST/MediaWiki lexers
-+ add: 2 options in settings/plugins.ini + menu item to open config file
++ add: 4 options in settings/plugins.ini + menu item to open config file
 
 2022.08.21
 initial

@@ -44,7 +44,8 @@ options in section [markdown_special_paste] are:
     {filedir} - Folder of current editor file.
     {projdir} - Folder of currently opened CudaText project.
                 If no project is opened, it's folder of current editor file.
- 
+- now - Date/time format for {now} macro. See Python docs for strftime().
+
 
 author: Alexey Torgashin
 license: MIT
