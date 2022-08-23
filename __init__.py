@@ -130,6 +130,9 @@ class Command:
             return
 
         fn_rel = os.path.relpath(fn, os.path.dirname(fn_ed))
+        fn_rel = fn_rel.replace('\\', '/')
+        fn_rel = fn_rel.replace(' ', '%20')
+
         text = text.replace('{filename}', fn_rel)
         ed.cmd(cmds.cCommand_TextInsert, text)
 
