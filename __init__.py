@@ -3,12 +3,14 @@ from cudatext import *
 import cudatext_cmd as cmds
 import requests
 import html
+from datetime import datetime
 
 fn_config = os.path.join(app_path(APP_DIR_SETTINGS), 'plugins.ini')
 option_section = 'markdown_special_paste'
 option_timeout = 5
 option_pic_path = '{projdir}'
 
+DATE_FORMAT = '%Y-%m-%d-%H-%M-%S'
 
 FORMAT_URL = {
     'Markdown': '[{title}]({url})',
@@ -104,7 +106,7 @@ class Command:
             return
 
         save_dir = resolve_pic_path(option_pic_path)
-        s_input = 'picture'
+        s_input = datetime.now().strftime(DATE_FORMAT)
 
         while True:
             s_input = dlg_input('Clipboard contains some picture.\nSave it to file in: "{}"\n(without ".png"):'.format(save_dir), s_input)
