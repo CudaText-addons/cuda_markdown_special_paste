@@ -1,3 +1,7 @@
 
+2022.08.23
+* renamed plugin to 'Markdown Special Paste'
++ add: handle pasting of pictures (Markdown, reST lexers)
+
 2022.08.21
 initial

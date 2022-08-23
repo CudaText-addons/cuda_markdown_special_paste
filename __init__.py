@@ -6,9 +6,14 @@ import html
 
 GET_TIMEOUT = 5 # in seconds
 
-FORMATS = {
+FORMAT_URL = {
     'Markdown': '[{title}]({url})',
     'reStructuredText': '`{title} <{url}>`__',
+}
+
+FORMAT_PIC = {
+    'Markdown': '![alt text]({filename} "Title")',
+    'reStructuredText': '\n.. image:: {filename}',
 }
 
 def dbg(s):
@@ -32,6 +37,49 @@ def get_title(s, tag):
 class Command:
 
     def on_paste(self, ed_self, keep_caret, select_then):
+
+        fmt = app_proc(PROC_CLIP_ENUM, '')
+        if 'p' in fmt:
+            self.paste_pic()
+            return False # block usual Paste
+
+        if 't' in fmt:
+            return self.paste_text()
+
+    def paste_pic(self):
+
+        fn_ed = ed.get_filename()
+        if not fn_ed:
+            msg_status('Cannot paste picture in the untitled tab')
+            return
+
+        while True:
+            s = dlg_input('Clipboard contains some picture.\nSave it to filename in the current folder (without ".png"):', 'temp_picture')
+            if not s:
+                return
+            if not s.endswith('.png'):
+                s += '.png'
+
+            fn = os.path.dirname(fn_ed)+os.sep+s
+            if os.path.exists(fn):
+                msg_status('File already exists: '+fn)
+            else:
+                break
+
+        if not app_proc(PROC_CLIP_SAVE_PIC, fn):
+            msg_status('Cannot save clipboard to file: '+fn)
+            return
+
+        lex = ed.get_prop(PROP_LEXER_FILE)
+        text = FORMAT_PIC.get(lex)
+        if not text:
+            return
+
+        text = text.replace('{filename}', os.path.basename(fn))
+        ed.cmd(cmds.cCommand_TextInsert, text)
+
+
+    def paste_text(self):
 
         # Shift pressed? don't work
         state = app_proc(PROC_GET_KEYSTATE, '')
@@ -58,7 +106,7 @@ class Command:
         title = get_title(text, 'title') or get_title(text, 'TITLE') or 'Title'
 
         lex = ed.get_prop(PROP_LEXER_CARET)
-        fmt = FORMATS.get(lex)
+        fmt = FORMAT_URL.get(lex)
         if not fmt:
             return
         fmt = fmt.replace('{url}', s)
