@@ -1,6 +1,6 @@
 [info]
 title=Markdown Special Paste
-desc=Specially handles 'Paste' action for lexers Markdown/reStructuredText
+desc=Specially handles 'Paste' action for lexers Markdown/reStructuredText: 1) pasting of URLs, 2) pasting of pictures.
 type=cudatext-plugin
 subdir=cuda_markdown_special_paste
 homepage=https://github.com/CudaText-addons/cuda_markdown_special_paste
