@@ -20,16 +20,26 @@ new file.
 - for MediaWiki: [[File:filename.png]]
 
 
-how to temporary skip plugin work? call the Paste command with any hotkey containing
-'Shift+' (or call menu item Paste while holding Shift).
-eg with Shift+Insert - standard second hotkey for Paste. or with Ctrl+Shift+V,
-but first you need to assign Ctrl+Shift+V to "Paste" (in the Command Palette dialog).
+how to temporary skip plugin work?
+----------------------------------
 
+call the Paste command with any hotkey containing 'Shift'
+(or call menu item Paste while holding Shift).
+e.g. use Shift+Insert (standard second hotkey for Paste).
+or use Ctrl+Shift+V, but first you need to assign Ctrl+Shift+V to "Paste"
+(in the Command Palette dialog).
+
+
+options
+-------
 
 config file "plugins.ini" can be opened via menu item:
   "Options / Settings-plugins / Markdown Special Paste / Config".
+
 options in section [markdown_special_paste] are:
 - url_timeout - Timeout in seconds, which it used on downloading webpage by its URL.
+- pic_name - Initial suggested name for picture file. Can have macros:
+    {now} - Current date/time formatted as yyyy-mm-dd-hh-mm-ss.
 - pic_path - Initial folder for picture file, when pasting picture. Can have macros:
     {filedir} - Folder of current editor file.
     {projdir} - Folder of currently opened CudaText project.
