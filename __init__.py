@@ -38,6 +38,11 @@ class Command:
 
     def on_paste(self, ed_self, keep_caret, select_then):
 
+        # Shift pressed? don't work
+        state = app_proc(PROC_GET_KEYSTATE, '')
+        if 's' in state:
+            return
+
         fmt = app_proc(PROC_CLIP_ENUM, '')
         if 'p' in fmt:
             self.paste_pic()
@@ -80,11 +85,6 @@ class Command:
 
 
     def paste_text(self):
-
-        # Shift pressed? don't work
-        state = app_proc(PROC_GET_KEYSTATE, '')
-        if 's' in state:
-            return
 
         s = app_proc(PROC_GET_CLIP, '')
         if '\n' in s:
