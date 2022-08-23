@@ -1,9 +1,9 @@
 [info]
-title=Special URL Paste
-desc=Modifies pasted URL, when pasting it in lexers Markdown, reStructuredText
+title=Markdown Special Paste
+desc=Specially handles 'Paste' action for lexers Markdown/reStructuredText
 type=cudatext-plugin
-subdir=cuda_special_url_paste
-homepage=https://github.com/CudaText-addons/cuda_special_url_paste
+subdir=cuda_markdown_special_paste
+homepage=https://github.com/CudaText-addons/cuda_markdown_special_paste
 
 [item1]
 section=events
