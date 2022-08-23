@@ -24,6 +24,16 @@ how to temporary skip plugin work? call the Paste command with any hotkey contai
 'Shift+' (or call menu item Paste while holding Shift).
 eg with Shift+Insert - standard second hotkey for Paste. or with Ctrl+Shift+V,
 but first you need to assign Ctrl+Shift+V to "Paste" (in the Command Palette dialog).
+
+
+config file "plugins.ini" can be opened via menu item:
+  "Options / Settings-plugins / Markdown Special Paste / Config".
+options there are:
+- url_timeout - Timeout in seconds, which it used on downloading webpage by its URL.
+- pic_path - Initial folder for picture file, when pasting picture. Can have macros:
+    {projdir} - Folder of currently opened CudaText project. If none, it's folder
+                of current editor file.
+    {filedir} - Folder of current editor file.
  
 
 author: Alexey Torgashin
