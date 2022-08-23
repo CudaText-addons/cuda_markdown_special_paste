@@ -5,6 +5,9 @@ import requests
 import html
 from datetime import datetime
 
+from cudax_lib import get_translation
+_   = get_translation(__file__)  # i18n
+
 fn_config = os.path.join(app_path(APP_DIR_SETTINGS), 'plugins.ini')
 option_section = 'markdown_special_paste'
 option_timeout = 5
@@ -43,9 +46,9 @@ def resolve_pic_path(s):
             else:
                 s = def_val
         except:
-            print('ERROR: Cannot find Project Manager in Markdown Special Paste plugin')
+            print('ERROR: '+_('Cannot import Project Manager in Markdown Special Paste plugin'))
             return ''
-    elif '{filedir}' in s:
+    else:
         s = s.replace('{filedir}', def_val)
 
     return s
@@ -80,7 +83,7 @@ class Command:
         try:
             option_timeout = int(ini_read(fn_config, option_section, 'url_timeout', str(option_timeout)))
         except:
-            print('ERROR: Wrong value in plugins.ini: ['+option_section+'] url_timeout')
+            print('ERROR: '+_('Bad value in plugins.ini [%s] %s')%(option_section, 'url_timeout'))
 
         option_pic_path = ini_read(fn_config, option_section, 'pic_path', option_pic_path)
         option_pic_name = ini_read(fn_config, option_section, 'pic_name', option_pic_name)
@@ -105,14 +108,15 @@ class Command:
 
         fn_ed = ed.get_filename()
         if not fn_ed:
-            msg_status('Cannot paste picture in the untitled tab')
+            msg_status(_('Cannot paste picture in the untitled tab'))
             return
 
         save_dir = resolve_pic_path(option_pic_path)
         s_input = option_pic_name.replace('{now}', datetime.now().strftime(DATE_FORMAT) )
 
         while True:
-            s_input = dlg_input('Clipboard contains some picture.\nSave it to file in: "{}"\n(without ".png"):'.format(save_dir), s_input)
+            s_input = dlg_input(
+                _('Clipboard contains some picture.\nSave it to file in: "{}"\n(without ".png"):').format(save_dir), s_input)
             s = s_input
             if not s:
                 return
@@ -121,12 +125,12 @@ class Command:
 
             fn = os.path.join(save_dir, s)
             if os.path.exists(fn):
-                msg_status('File already exists: '+fn)
+                msg_status(_('File already exists: ')+fn)
             else:
                 break
 
         if not app_proc(PROC_CLIP_SAVE_PIC, fn):
-            msg_status('Cannot save clipboard to file: '+fn)
+            msg_status(_('Cannot save clipboard to file: ')+fn)
             return
 
         lex = ed.get_prop(PROP_LEXER_FILE)
