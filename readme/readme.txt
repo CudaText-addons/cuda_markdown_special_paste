@@ -28,12 +28,12 @@ but first you need to assign Ctrl+Shift+V to "Paste" (in the Command Palette dia
 
 config file "plugins.ini" can be opened via menu item:
   "Options / Settings-plugins / Markdown Special Paste / Config".
-options there are:
+options in section [markdown_special_paste] are:
 - url_timeout - Timeout in seconds, which it used on downloading webpage by its URL.
 - pic_path - Initial folder for picture file, when pasting picture. Can have macros:
-    {projdir} - Folder of currently opened CudaText project. If none, it's folder
-                of current editor file.
     {filedir} - Folder of current editor file.
+    {projdir} - Folder of currently opened CudaText project.
+                If no project is opened, it's folder of current editor file.
  
 
 author: Alexey Torgashin
