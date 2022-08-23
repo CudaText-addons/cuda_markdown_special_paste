@@ -9,11 +9,13 @@ GET_TIMEOUT = 5 # in seconds
 FORMAT_URL = {
     'Markdown': '[{title}]({url})',
     'reStructuredText': '`{title} <{url}>`__',
+    'MediaWiki': '[{url} {title}]',
 }
 
 FORMAT_PIC = {
     'Markdown': '![alt text]({filename} "Title")',
     'reStructuredText': '\n.. image:: {filename}',
+    'MediaWiki': '\n[[File:{filename}]]',
 }
 
 def dbg(s):
