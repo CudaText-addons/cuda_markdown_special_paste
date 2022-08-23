@@ -13,8 +13,7 @@ option_section = 'markdown_special_paste'
 option_timeout = 5
 option_pic_path = '{projdir}'
 option_pic_name = '{now}'
-
-DATE_FORMAT = '%Y-%m-%d-%H-%M-%S'
+option_now = '%Y-%m-%d-%H-%M-%S'
 
 FORMAT_URL = {
     'Markdown': '[{title}]({url})',
@@ -79,6 +78,7 @@ class Command:
         global option_timeout
         global option_pic_path
         global option_pic_name
+        global option_now
 
         try:
             option_timeout = int(ini_read(fn_config, option_section, 'url_timeout', str(option_timeout)))
@@ -87,6 +87,7 @@ class Command:
 
         option_pic_path = ini_read(fn_config, option_section, 'pic_path', option_pic_path)
         option_pic_name = ini_read(fn_config, option_section, 'pic_name', option_pic_name)
+        option_now = ini_read(fn_config, option_section, 'now', option_now)
 
 
     def on_paste(self, ed_self, keep_caret, select_then):
@@ -112,7 +113,7 @@ class Command:
             return
 
         save_dir = resolve_pic_path(option_pic_path)
-        s_input = option_pic_name.replace('{now}', datetime.now().strftime(DATE_FORMAT) )
+        s_input = option_pic_name.replace('{now}', datetime.now().strftime(option_now) )
 
         while True:
             s_input = dlg_input(
@@ -183,4 +184,5 @@ class Command:
         ini_write(fn_config, option_section, 'url_timeout', str(option_timeout))
         ini_write(fn_config, option_section, 'pic_path', option_pic_path)
         ini_write(fn_config, option_section, 'pic_name', option_pic_name)
+        ini_write(fn_config, option_section, 'now', option_now)
         file_open(fn_config)
