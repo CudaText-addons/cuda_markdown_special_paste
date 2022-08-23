@@ -6,16 +6,17 @@ it handles "on_paste" event for lexers:
 - AsciiDoc
 
 1) if clipboard contains text URL: 'http://' or 'https://'.
-it changes pasted text according to these templates:
+plugin changes text according to templates:
 
 - for Markdown: [Text](url)
 - for reStructuredText: `Text <url>`__
 - for MediaWiki: [url Text]
 - for AsciiDoc: url[title]
 
-2) if clipboard contains a picture. plugin then suggests to save the picture
-in the folder of the current file, and after that it inserts the link to this
-new file.
+2) if clipboard contains a picture.
+plugin suggests to save the picture in the folder of the current file
+(or the folder of the current Project Manager project, by option).
+after that it inserts the link to this new file.
 
 - for Markdown: '![alt text](filename.png "Title")
 - for reStructuredText: .. image:: filename.png
@@ -23,11 +24,11 @@ new file.
 - for AsciiDoc: image:filename.png[title="Title"]
 
 
-how to temporary skip plugin work?
-----------------------------------
+how to temporary skip plugin work
+---------------------------------
 
-call the Paste command with any hotkey containing 'Shift'
-(or call menu item Paste while holding Shift).
+to skip plugin handling, call the Paste command with any hotkey
+containing Shift, or call menu item Paste while holding Shift.
 e.g. use Shift+Insert (standard second hotkey for Paste).
 or use Ctrl+Shift+V, but first you need to assign Ctrl+Shift+V to "Paste"
 (in the Command Palette dialog).
