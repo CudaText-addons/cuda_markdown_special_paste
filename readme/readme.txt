@@ -3,6 +3,7 @@ it handles "on_paste" event for lexers:
 - Markdown
 - reStructuredText
 - MediaWiki
+- AsciiDoc
 
 1) if clipboard contains text URL: 'http://' or 'https://'.
 it changes pasted text according to these templates:
@@ -10,6 +11,7 @@ it changes pasted text according to these templates:
 - for Markdown: [Text](url)
 - for reStructuredText: `Text <url>`__
 - for MediaWiki: [url Text]
+- for AsciiDoc: url[title]
 
 2) if clipboard contains a picture. plugin then suggests to save the picture
 in the folder of the current file, and after that it inserts the link to this
@@ -18,6 +20,7 @@ new file.
 - for Markdown: '![alt text](filename.png "Title")
 - for reStructuredText: .. image:: filename.png
 - for MediaWiki: [[File:filename.png]]
+- for AsciiDoc: image:filename.png[title="Title"]
 
 
 how to temporary skip plugin work?
