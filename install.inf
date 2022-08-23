@@ -9,3 +9,9 @@ homepage=https://github.com/CudaText-addons/cuda_markdown_special_paste
 section=events
 events=on_paste
 lexers=Markdown,reStructuredText,MediaWiki
+
+[item20]
+section=commands
+caption=Markdown Special Paste\Config
+method=config
+menu=o

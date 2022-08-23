@@ -4,7 +4,11 @@ import cudatext_cmd as cmds
 import requests
 import html
 
-GET_TIMEOUT = 5 # in seconds
+fn_config = os.path.join(app_path(APP_DIR_SETTINGS), 'plugins.ini')
+option_section = 'markdown_special_paste'
+option_timeout = 5
+option_pic_path = '{projdir}'
+
 
 FORMAT_URL = {
     'Markdown': '[{title}]({url})',
@@ -17,6 +21,32 @@ FORMAT_PIC = {
     'reStructuredText': '\n.. image:: {filename}',
     'MediaWiki': '\n[[File:{filename}]]',
 }
+
+def resolve_pic_path(s):
+
+    if os.name=='nt':
+        s = s.replace('/', '\\')
+
+    def_val = os.path.dirname(ed.get_filename())
+
+    if '{projdir}' in s:
+        try:
+            import cuda_project_man
+            info = cuda_project_man.global_project_info
+            #print(info)
+            proj_dir = os.path.dirname(info.get('filename', ''))
+            if proj_dir:
+                s = s.replace('{projdir}', proj_dir)
+            else:
+                s = def_val
+        except:
+            print('ERROR: Cannot find Project Manager in Markdown Special Paste plugin')
+            return ''
+    elif '{filedir}' in s:
+        s = s.replace('{filedir}', def_val)
+
+    return s
+
 
 def dbg(s):
     #print(s)
@@ -37,6 +67,19 @@ def get_title(s, tag):
 
 
 class Command:
+
+    def __init__(self):
+
+        global option_timeout
+        global option_pic_path
+
+        try:
+            option_timeout = int(ini_read(fn_config, option_section, 'url_timeout', str(option_timeout)))
+        except:
+            print('ERROR: Wrong value in plugins.ini: ['+option_section+'] url_timeout')
+
+        option_pic_path = ini_read(fn_config, option_section, 'pic_path', option_pic_path)
+
 
     def on_paste(self, ed_self, keep_caret, select_then):
 
@@ -60,14 +103,18 @@ class Command:
             msg_status('Cannot paste picture in the untitled tab')
             return
 
+        save_dir = resolve_pic_path(option_pic_path)
+        s_input = 'picture'
+
         while True:
-            s = dlg_input('Clipboard contains some picture.\nSave it to filename in the current folder (without ".png"):', 'temp_picture')
+            s_input = dlg_input('Clipboard contains some picture.\nSave it to file in: "{}"\n(without ".png"):'.format(save_dir), s_input)
+            s = s_input
             if not s:
                 return
             if not s.endswith('.png'):
                 s += '.png'
 
-            fn = os.path.dirname(fn_ed)+os.sep+s
+            fn = os.path.join(save_dir, s)
             if os.path.exists(fn):
                 msg_status('File already exists: '+fn)
             else:
@@ -82,7 +129,8 @@ class Command:
         if not text:
             return
 
-        text = text.replace('{filename}', os.path.basename(fn))
+        fn_rel = os.path.relpath(fn, os.path.dirname(fn_ed))
+        text = text.replace('{filename}', fn_rel)
         ed.cmd(cmds.cCommand_TextInsert, text)
 
 
@@ -95,7 +143,7 @@ class Command:
             return
 
         try:
-            r = requests.get(s, verify=False, timeout=GET_TIMEOUT)
+            r = requests.get(s, verify=False, timeout=option_timeout)
         except:
             return
 
@@ -116,3 +164,10 @@ class Command:
 
         ed.cmd(cmds.cCommand_TextInsert, fmt)
         return False #block usual Paste
+
+
+    def config(self):
+
+        ini_write(fn_config, option_section, 'url_timeout', str(option_timeout))
+        ini_write(fn_config, option_section, 'pic_path', option_pic_path)
+        file_open(fn_config)
