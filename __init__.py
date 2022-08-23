@@ -15,16 +15,19 @@ option_pic_path = '{projdir}'
 option_pic_name = '{now}'
 option_now = '%Y-%m-%d-%H-%M-%S'
 
+
 FORMAT_URL = {
     'Markdown': '[{title}]({url})',
     'reStructuredText': '`{title} <{url}>`__',
     'MediaWiki': '[{url} {title}]',
+    'AsciiDoc': '{url}[{title}]',
 }
 
 FORMAT_PIC = {
     'Markdown': '![alt text]({filename} "Title")',
     'reStructuredText': '\n.. image:: {filename}',
     'MediaWiki': '\n[[File:{filename}]]',
+    'AsciiDoc': 'image:{filename}[title="Title"]',
 }
 
 def resolve_pic_path(s):
