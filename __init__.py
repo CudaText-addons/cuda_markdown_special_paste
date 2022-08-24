@@ -21,6 +21,7 @@ FORMAT_URL = {
     'reStructuredText': '`{title} <{url}>`__',
     'MediaWiki': '[{url} {title}]',
     'AsciiDoc': '{url}[{title}]',
+    'LaTeX': r'\href{{url}}{{title}}',
 }
 
 FORMAT_PIC = {
@@ -28,6 +29,7 @@ FORMAT_PIC = {
     'reStructuredText': '\n.. image:: {filename}',
     'MediaWiki': '\n[[File:{filename}]]',
     'AsciiDoc': 'image:{filename}[title="Title"]',
+    'LaTeX': r'\includegraphics[width=\linewidth]{{filename}}',
 }
 
 def resolve_pic_path(s):

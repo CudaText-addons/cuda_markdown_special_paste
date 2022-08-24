@@ -1,6 +1,7 @@
 
 2022.08.24
 + add: support nested dirs in "pic_path" option
++ add: support LaTeX lexer
 
 2022.08.23
 * renamed plugin to 'Markdown Special Paste'

@@ -4,6 +4,7 @@ it handles "on_paste" event for lexers:
 - reStructuredText
 - MediaWiki
 - AsciiDoc
+- LaTeX
 
 1) if clipboard contains text URL: 'http://' or 'https://'.
 plugin changes text according to templates:
@@ -12,6 +13,7 @@ plugin changes text according to templates:
 - for reStructuredText: `Text <url>`__
 - for MediaWiki: [url Text]
 - for AsciiDoc: url[title]
+- for LaTeX: \href{url}{title}
 
 2) if clipboard contains a picture.
 plugin suggests to save the picture in the folder of the current file
@@ -22,6 +24,7 @@ after that it inserts the link to this new file.
 - for reStructuredText: .. image:: filename.png
 - for MediaWiki: [[File:filename.png]]
 - for AsciiDoc: image:filename.png[title="Title"]
+- for LaTeX: \includegraphics[width=\linewidth]{filename.png}
 
 
 how to temporary skip plugin work
