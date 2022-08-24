@@ -32,8 +32,8 @@ FORMAT_PIC = {
 
 def resolve_pic_path(s):
 
-    if os.name=='nt':
-        s = s.replace('/', '\\')
+    if os.sep!='/':
+        s = s.replace('/', os.sep)
 
     def_val = os.path.dirname(ed.get_filename())
 
@@ -52,6 +52,9 @@ def resolve_pic_path(s):
             return ''
     else:
         s = s.replace('{filedir}', def_val)
+
+    if os.sep in s:
+        os.makedirs(s, exist_ok=True)
 
     return s
 
