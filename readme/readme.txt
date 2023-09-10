@@ -51,7 +51,7 @@ options in section [markdown_special_paste] are:
     {now} - Current date/time formatted as yyyy-mm-dd-hh-mm-ss.
 - "pic_path" - Initial folder for picture file, when pasting picture.
     Can contain subfolders with separator "/", they will be auto-created.
-    Options value must begin with one of macros:
+    Option value must begin with one of macros:
     {filedir} - Folder of current editor file.
     {projdir} - Folder of currently opened CudaText project.
                 If no project is opened, it's folder of current editor file.
