@@ -121,7 +121,9 @@ class Command:
             return
 
         save_dir = resolve_pic_path(option_pic_path)
-        s_input = option_pic_name.replace('{now}', datetime.now().strftime(option_now) )
+        s_input = option_pic_name\
+                    .replace('{now}', datetime.now().strftime(option_now) )\
+                    .replace('{dirname}', os.path.basename(os.path.dirname(fn_ed)))
 
         while True:
             s_input = dlg_input(
@@ -194,3 +196,11 @@ class Command:
         ini_write(fn_config, option_section, 'pic_name', option_pic_name)
         ini_write(fn_config, option_section, 'now', option_now)
         file_open(fn_config)
+
+        lines = [ed.get_text_line(i) for i in range(ed.get_line_count())]
+        try:
+            index = lines.index('['+option_section+']')
+            ed.set_caret(0, index)
+        except:
+            pass
+            
