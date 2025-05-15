@@ -1,3 +1,5 @@
+2025.05.15
++ add: support macro {dirname} for option "pic_name"
 
 2022.08.24
 + add: support nested dirs in "pic_path" option

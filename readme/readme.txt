@@ -49,6 +49,7 @@ options in section [markdown_special_paste] are:
 - "pic_name" - Initial suggested name for picture file.
     Can have macros:
     {now} - Current date/time formatted as yyyy-mm-dd-hh-mm-ss.
+    {dirname} - Name of parent folder, without path.
 - "pic_path" - Initial folder for picture file, when pasting picture.
     Can contain subfolders with separator "/", they will be auto-created.
     Option value must begin with one of macros:
