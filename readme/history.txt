@@ -1,5 +1,5 @@
 2025.08.13
-+ add: new option "pic_ext" which can be "png"/"jpg"/"jpeg".
++ add: new option "pic_ext" which can be "png"/"jpg"/"jpeg" (patch by @mrkingmidas)
 
 2025.05.15
 + add: support macro {dirname} for option "pic_name"
