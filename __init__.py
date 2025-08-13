@@ -13,6 +13,7 @@ option_section = 'markdown_special_paste'
 option_timeout = 5
 option_pic_path = '{projdir}'
 option_pic_name = '{now}'
+option_pic_ext = 'png'
 option_now = '%Y-%m-%d-%H-%M-%S'
 
 
@@ -86,6 +87,7 @@ class Command:
         global option_timeout
         global option_pic_path
         global option_pic_name
+        global option_pic_ext
         global option_now
 
         try:
@@ -95,6 +97,7 @@ class Command:
 
         option_pic_path = ini_read(fn_config, option_section, 'pic_path', option_pic_path)
         option_pic_name = ini_read(fn_config, option_section, 'pic_name', option_pic_name)
+        option_pic_ext = ini_read(fn_config, option_section, 'pic_ext', option_pic_ext)
         option_now = ini_read(fn_config, option_section, 'now', option_now)
 
 
@@ -127,12 +130,12 @@ class Command:
 
         while True:
             s_input = dlg_input(
-                _('Clipboard contains some picture.\nSave it to file in: "{}"\n(without ".png"):').format(save_dir), s_input)
+                _('Clipboard contains some picture.\nSave it to file in: "{}"\n(without ".{}"):').format(save_dir, option_pic_ext), s_input)
             s = s_input
             if not s:
                 return
-            if not s.endswith('.png'):
-                s += '.png'
+            if not s.endswith('.' + option_pic_ext) and not s.endswith('.png') and not s.endswith('.jpg') and not s.endswith('.jpeg'):
+                s += '.' + option_pic_ext
 
             fn = os.path.join(save_dir, s)
             if os.path.exists(fn):
@@ -194,6 +197,7 @@ class Command:
         ini_write(fn_config, option_section, 'url_timeout', str(option_timeout))
         ini_write(fn_config, option_section, 'pic_path', option_pic_path)
         ini_write(fn_config, option_section, 'pic_name', option_pic_name)
+        ini_write(fn_config, option_section, 'pic_ext', option_pic_ext)
         ini_write(fn_config, option_section, 'now', option_now)
         file_open(fn_config)
 
@@ -203,4 +207,3 @@ class Command:
             ed.set_caret(0, index)
         except:
             pass
-            
