@@ -1,3 +1,6 @@
+2025.08.13
++ add: new option "pic_ext" which can be "png"/"jpg"/"jpeg".
+
 2025.05.15
 + add: support macro {dirname} for option "pic_name"
 
@@ -11,4 +14,4 @@
 + add: 4 options in settings/plugins.ini + menu item to open config file
 
 2022.08.21
-initial
+initial version

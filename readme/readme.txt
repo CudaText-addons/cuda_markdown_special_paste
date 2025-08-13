@@ -46,16 +46,22 @@ config file "plugins.ini" can be opened via menu item:
 options in section [markdown_special_paste] are:
 
 - "url_timeout" - Timeout in seconds, which it used on downloading webpage by its URL.
+
 - "pic_name" - Initial suggested name for picture file.
     Can have macros:
     {now} - Current date/time formatted as yyyy-mm-dd-hh-mm-ss.
     {dirname} - Name of parent folder, without path.
+
 - "pic_path" - Initial folder for picture file, when pasting picture.
     Can contain subfolders with separator "/", they will be auto-created.
     Option value must begin with one of macros:
     {filedir} - Folder of current editor file.
     {projdir} - Folder of currently opened CudaText project.
                 If no project is opened, it's folder of current editor file.
+
+- "pic_ext" - Image file extension without dot. Can be "png", "jpg", "jpeg".
+              For other values (e.g. "gif") you will get the plugin error.
+
 - "now" - Date/time format for {now} macro. See Python docs for strftime().
 
 
