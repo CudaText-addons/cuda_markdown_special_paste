@@ -1,3 +1,6 @@
+2026.11.21
+- fix: avoid deprecated API: get_filename
+
 2025.08.13
 + add: new option "pic_ext" which can be "png"/"jpg"/"jpeg" (patch by @mrkingmidas)
 

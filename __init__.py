@@ -1,9 +1,9 @@
 import os
+import html
+import requests
+from datetime import datetime
 from cudatext import *
 import cudatext_cmd as cmds
-import requests
-import html
-from datetime import datetime
 
 from cudax_lib import get_translation
 _   = get_translation(__file__)  # i18n
@@ -38,7 +38,7 @@ def resolve_pic_path(s):
     if os.sep!='/':
         s = s.replace('/', os.sep)
 
-    def_val = os.path.dirname(ed.get_filename())
+    def_val = os.path.dirname(ed.get_prop(PROP_FN, ''))
 
     if '{projdir}' in s:
         try:
@@ -118,7 +118,7 @@ class Command:
 
     def paste_pic(self):
 
-        fn_ed = ed.get_filename()
+        fn_ed = ed.get_prop(PROP_FN, '')
         if not fn_ed:
             msg_status(_('Cannot paste picture in the untitled tab'))
             return
